@@ -1,9 +1,15 @@
 {
   "name": "dsh-agent-one",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "一体化项目主智能体：一个项目一个会话，按需复用 pm/cto/dev 子智能体",
-  "keywords": ["dsh", "dsh-plugin", "deepseek-harness", "cordis-plugin", "orchestrator"],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis-plugin",
+    "orchestrator"
+  ],
   "author": "Casper <solitaryreach@163.com>",
   "license": "Apache-2.0",
   "packageManager": "pnpm@11.7.0",
@@ -33,8 +39,14 @@
     "skills/",
     "cordis.patch.yml"
   ],
-  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
-  "publishConfig": { "access": "public" },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "pnpm clean && pnpm typecheck && tsc -p tsconfig.server.json && node scripts/copy-assets.mjs",
     "build:server": "pnpm clean && tsc -p tsconfig.server.json && node scripts/copy-assets.mjs",
@@ -51,9 +63,15 @@
     "@deepseek-ai/dsh-tools": ">=0.2.1-rc.2 <0.3.0"
   },
   "peerDependenciesMeta": {
-    "@deepseek-ai/dsh-skill": { "optional": true },
-    "@deepseek-ai/dsh-skill-filesystem": { "optional": true },
-    "@deepseek-ai/dsh-tools": { "optional": true }
+    "@deepseek-ai/dsh-skill": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-skill-filesystem": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "4.1.0",
