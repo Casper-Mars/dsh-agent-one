@@ -1,22 +1,30 @@
 # dsh-agent-one
 
 一体化项目主智能体：**一个项目一个会话**，主 agent 持有项目全貌，按需复用
-`pm` / `cto` / `dev` 子智能体。与 `dsh-agent-dev` 同源，但只提供一个 preset：`one`。
+`pm` / `cto` / `dev` 子智能体。
 
-## 结构
+**自包含**：pm / cto / dev 的 persona、领域 Skill 与 preset 已复制进本包，
+部署时只装 `dsh-agent-one`，不再安装 `dsh-agent-pm` / `dsh-agent-cto` /
+`dsh-agent-dev`。
 
-| 组件 | 职责 |
+## Preset
+
+| preset | 职责 |
 |---|---|
-| `one` preset | 项目主智能体；路由、上下文维护、任务生命周期 |
-| `pm` / `cto` / `dev-*` preset | 角色子智能体；深度技能留在各自包里 |
-| `one-routing` skill | 任务该自己答 / 交谁 / 复用哪个 child |
-| `one-project-memory` skill | 项目结论、child id、未决项与压缩时机 |
+| `one` | 项目主智能体；路由、上下文维护、任务生命周期 |
+| `pm` | 产品经理：洞察、PRD、排序、交接、发布、复盘 |
+| `cto` | CTO：技术决策、架构方案、评审、拆解 |
+| `dev-leader` | 开发调度：派单、质量门、发布、复盘 |
+| `dev-developer` | 编码执行 |
+| `dev-tester` | 独立验收 |
+
+工具面与角色 Skill 均从原角色包复制；Skill 共 35 个（one 2 + pm 10 + cto 10 + dev 13）。
 
 ## 会话与权限
 
 - 会话键：`project_id`（kit `worker.sessionKey = project`）
-- 权限：固定 `workspace-write`；`dev-domain` 不再给子 agent 提权
-- 子智能体：`delegate` + `send_message` 复用；默认 `maxDepth: 1`
+- 权限：固定 `workspace-write`；不在本包切换 `danger-full-access`
+- 子智能体：`delegate` + `send_message` 复用；`maxDepth: 1`
 
 ## 子智能体报告契约
 
@@ -37,10 +45,16 @@ pnpm test
 pnpm build
 ```
 
-## 部署（sanding）
+## 部署（三鼎 sanding）
+
+在现有 compose 中只新增 `dsh-agent-one` 一个 service，复用现有 `echuan`：
 
 ```bash
-docker compose up -d echuan-one dsh-agent-one
+docker compose up -d dsh-agent-one
 ```
 
-端口：平台 `127.0.0.1:8722`，relay `0.0.0.0:3444`。
+默认 `worker.poll.enable: false`，避免与 `dsh-agent` 抢同 kinds 的卡。
+需要测试派单时，先暂停 `dsh-agent`，再把
+`deployment/agents/dsh-agent-one.patch.yml` 里的 `poll.enable` 改为 `true`。
+
+端口：relay `0.0.0.0:3444`。

@@ -1,8 +1,8 @@
 {
   "name": "dsh-agent-one",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "type": "module",
-  "description": "一体化项目主智能体：一个项目一个会话，按需复用 pm/cto/dev 子智能体",
+  "description": "一体化项目主智能体：一个项目一个会话，内置 pm/cto/dev 角色，自包含部署",
   "keywords": [
     "dsh",
     "dsh-plugin",
@@ -29,7 +29,27 @@
       "default": "./dist-server/assets.js"
     },
     "./cordis.patch.yml": "./cordis.patch.yml",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./assets/pm": {
+      "types": "./dist-server/types/assets-pm.d.ts",
+      "default": "./dist-server/assets-pm.js"
+    },
+    "./assets/cto": {
+      "types": "./dist-server/types/assets-cto.d.ts",
+      "default": "./dist-server/assets-cto.js"
+    },
+    "./assets/dev-leader": {
+      "types": "./dist-server/types/assets-dev-leader.d.ts",
+      "default": "./dist-server/assets-dev-leader.js"
+    },
+    "./assets/dev-developer": {
+      "types": "./dist-server/types/assets-dev-developer.d.ts",
+      "default": "./dist-server/assets-dev-developer.js"
+    },
+    "./assets/dev-tester": {
+      "types": "./dist-server/types/assets-dev-tester.d.ts",
+      "default": "./dist-server/assets-dev-tester.js"
+    }
   },
   "files": [
     "dist-server/**/*.js",
