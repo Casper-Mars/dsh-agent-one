@@ -24,7 +24,8 @@
 
 - 会话键：`project_id`（kit `worker.sessionKey = project`）
 - 权限：固定 `workspace-write`；不在本包切换 `danger-full-access`
-- 子智能体：`delegate` + `send_message` 复用；`maxDepth: 1`
+- 子智能体：`delegate` + `send_message` 复用；`maxDepth: 2`（0=主 agent，1=Leader，2=developer/tester）。
+  设成 1 时 Leader 的工具描述会写「remaining levels 0」，模型会直接自己写代码、不派发。
 
 ## 子智能体报告契约
 
