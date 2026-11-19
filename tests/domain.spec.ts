@@ -32,7 +32,7 @@ describe('dsh-agent-one', () => {
     }
   })
 
-  it('patch 自包含：registry + one/pm/cto/dev 六个 preset', () => {
+  it('patch 自包含：registry + one/pm/cto/dev/designer 七个 preset', () => {
     const doc = parse(readFileSync(path.join(root, 'cordis.patch.yml'), 'utf8'))
     const inserts = doc[0].insert as Array<{ id: string; config?: any }>
     expect(inserts.map(item => item.id)).toEqual([
@@ -43,13 +43,14 @@ describe('dsh-agent-one', () => {
       'preset-dev-leader',
       'preset-dev-developer',
       'preset-dev-tester',
+      'preset-designer',
     ])
 
     const registry = inserts[0]!.config
     expect(registry.default).toBe('one')
 
     const presetIds = inserts.slice(1).map(item => item.config.id)
-    expect(presetIds).toEqual(['one', 'pm', 'cto', 'dev-leader', 'dev-developer', 'dev-tester'])
+    expect(presetIds).toEqual(['one', 'pm', 'cto', 'dev-leader', 'dev-developer', 'dev-tester', 'designer'])
   })
 
   it('one 的 delegate 允许五个内置角色，maxDepth 2（覆盖 Leader 再派一层）', () => {

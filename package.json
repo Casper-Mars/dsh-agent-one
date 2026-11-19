@@ -49,6 +49,10 @@
     "./assets/dev-tester": {
       "types": "./dist-server/types/assets-dev-tester.d.ts",
       "default": "./dist-server/assets-dev-tester.js"
+    },
+    "./assets/designer": {
+      "types": "./dist-server/types/assets-designer.d.ts",
+      "default": "./dist-server/assets-designer.js"
     }
   },
   "files": [
