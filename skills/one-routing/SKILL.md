@@ -17,7 +17,8 @@ whenToUse: 主智能体收到任何任务卡、issue、需求或评审请求，�
    - 需求定义 / PRD → `pm`
    - 方案 / 架构 / 技术评审 → `cto`
    - 代码实现 / 测试 / 修复 → `dev-leader`
-4. **判断复用还是新建**：同项目同角色已有 child → `send_message` 继续；没有才 `delegate`。
+4. **先复用，再新建**：先 `list_agents`（children）核对同角色 child —— 有就 `send_message` 继续（带完整交接单），
+   没有才 `delegate`。同一角色只保留一个 child，按任务串行复用，不要每张卡新建一个。
 5. **交付核对**：子智能体必须用 `echuan_task_report` 带 `lease_id` 报告；你核对产物后再认为任务进入 `in_review`。
 
 ## 子智能体调用
