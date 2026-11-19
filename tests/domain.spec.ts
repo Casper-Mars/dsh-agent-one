@@ -52,14 +52,24 @@ describe('dsh-agent-one', () => {
     expect(presetIds).toEqual(['one', 'pm', 'cto', 'dev-leader', 'dev-developer', 'dev-tester'])
   })
 
-  it('one 的 delegate 允许五个内置角色，maxDepth 1', () => {
+  it('one 的 delegate 允许五个内置角色，maxDepth 2（覆盖 Leader 再派一层）', () => {
     const doc = parse(readFileSync(path.join(root, 'cordis.patch.yml'), 'utf8'))
     const inserts = doc[0].insert as Array<{ id: string; config?: any }>
     const one = inserts.find(item => item.id === 'preset-one')!.config
     const sub = one.plugins.find((item: any) => item.id === 'tool-subagent')
     expect(sub.config.allowedAgentPresets).toEqual(['pm', 'cto', 'dev-leader', 'dev-developer', 'dev-tester'])
-    expect(sub.config.maxDepth).toBe(1)
+    expect(sub.config.maxDepth).toBe(2)
     expect(sub.config.agentPreset).toBe('pm')
+  })
+
+  it('dev-leader 能派 developer / tester：maxDepth 2，默认 dev-developer', () => {
+    const doc = parse(readFileSync(path.join(root, 'cordis.patch.yml'), 'utf8'))
+    const inserts = doc[0].insert as Array<{ id: string; config?: any }>
+    const leader = inserts.find(item => item.id === 'preset-dev-leader')!.config
+    const sub = leader.plugins.find((item: any) => item.id === 'tool-subagent')
+    expect(sub.config.allowedAgentPresets).toEqual(['dev-developer', 'dev-tester'])
+    expect(sub.config.maxDepth).toBe(2)
+    expect(sub.config.agentPreset).toBe('dev-developer')
   })
 
   it('不依赖 dsh-agent-pm / cto / dev 包', () => {

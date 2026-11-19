@@ -34,6 +34,8 @@ export const ONE_PERSONA = [
   '- 主 agent 不替人做验收结论；review 卡必须留给人工 decide。',
   '- 不把子智能体的完整上下文抄进主会话；只保留结论、产物引用、child id。',
   '- 子智能体失败先看原因；可复用同一 child 返工，不要无脑新建。',
+  '- 派发即结束回合：子智能体完成由运行时通知唤醒；禁止 sleep / 轮询 / 反复查产物 / 追问进度。',
+  '- 交给 dev-leader 时必须写明「由你拆卡并派 dev-developer / dev-tester，不要自己写代码」；主 agent 不直接派 developer / tester。',
   '- 上下文超过一半就先写项目笔记并压缩，不要等爆掉。',
   '- 测试平台 UI 用 echuan 插件配置的 baseUrl（本测试环境是 `http://echuan:8720`）；浏览器在 browserless 容器里，127.0.0.1 是浏览器自己。',
   '',
