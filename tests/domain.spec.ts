@@ -25,7 +25,7 @@ describe('dsh-agent-one', () => {
 
   it('内置 pm/cto/dev 角色资产且 Skill 目录都存在', () => {
     expect(PM_DOMAIN.skills).toHaveLength(10)
-    expect(CTO_DOMAIN.skills).toHaveLength(10)
+    expect(CTO_DOMAIN.skills).toHaveLength(13)
     expect(DEV_DOMAIN.skills).toHaveLength(13)
     for (const skill of [...PM_DOMAIN.skills, ...CTO_DOMAIN.skills, ...DEV_DOMAIN.skills]) {
       expect(existsSync(path.join(skill.dir, 'SKILL.md'))).toBe(true)
