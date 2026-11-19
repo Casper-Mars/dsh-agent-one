@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { parse } from 'yaml'
 import { describe, expect, it } from 'vitest'
 import { ONE_DOMAIN } from '../src/domain.js'
+import { DESIGNER_PERSONA } from '../src/persona-designer'
 import { ONE_PERSONA } from '../src/persona.js'
 import { PM_DOMAIN } from '../src/domain-pm.js'
 import { CTO_DOMAIN } from '../src/domain-cto.js'
@@ -79,5 +80,12 @@ describe('dsh-agent-one', () => {
     expect(deps['dsh-agent-pm']).toBeUndefined()
     expect(deps['dsh-agent-cto']).toBeUndefined()
     expect(deps['dsh-agent-dev']).toBeUndefined()
+  })
+})
+
+describe('persona 渲染安全', () => {
+  it('persona 不得包含 prompt 变量语法 {{ }}', () => {
+    expect(ONE_PERSONA).not.toContain('{{')
+    expect(DESIGNER_PERSONA).not.toContain('{{')
   })
 })
