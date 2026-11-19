@@ -1,6 +1,6 @@
 {
   "name": "dsh-agent-one",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "type": "module",
   "description": "一体化项目主智能体：一个项目一个会话，内置 pm/cto/dev 角色，自包含部署",
   "keywords": [

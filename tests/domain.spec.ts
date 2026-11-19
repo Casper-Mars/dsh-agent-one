@@ -17,7 +17,7 @@ describe('dsh-agent-one', () => {
   })
 
   it('one 声明 2 个 Skill，且目录存在', () => {
-    expect(ONE_DOMAIN.skills).toHaveLength(2)
+    expect(ONE_DOMAIN.skills).toHaveLength(3)
     for (const skill of ONE_DOMAIN.skills) {
       expect(existsSync(path.join(skill.dir, 'SKILL.md'))).toBe(true)
     }

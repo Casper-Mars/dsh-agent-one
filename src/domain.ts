@@ -1,4 +1,4 @@
-/** `one` 领域：2 个路由/记忆 Skill + 主智能体人设。 */
+/** `one` 领域：3 个 Skill（路由 / 项目记忆 / 维护分诊）+ 主智能体人设。 */
 import { fileURLToPath } from 'node:url'
 import { ONE_PERSONA } from './persona.js'
 
@@ -37,6 +37,10 @@ export const ONE_DOMAIN: OneDomain = {
     skill(
       'one-project-memory',
       '维护项目级会话记忆：项目结论、子智能体 id、未决项与压缩时机，避免上下文丢失。',
+    ),
+    skill(
+      'maintainer',
+      '仓库维护分诊：issue / 缺陷 / 小改动的四类判断、证据门槛、轻修复与需求出口、对外动作分级。',
     ),
   ],
 }
