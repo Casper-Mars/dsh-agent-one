@@ -61,7 +61,8 @@
     "dist-server/**/*.md",
     "dist-server/cordis.patch.yml",
     "skills/",
-    "cordis.patch.yml"
+    "cordis.patch.yml",
+    "design-kit/"
   ],
   "dsh": {
     "bundle": {

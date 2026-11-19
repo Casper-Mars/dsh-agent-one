@@ -59,3 +59,14 @@ docker compose up -d dsh-agent-one
 `deployment/agents/dsh-agent-one.patch.yml` 里的 `poll.enable` 改为 `true`。
 
 端口：relay `0.0.0.0:3444`。
+
+## design-kit（副本）
+
+本包的 `design-kit/` 与 `skills/ui-design|ui-prototype|ui-handoff` 是
+`dsh-agent-cto` 的**逐字节副本**，不要在这里手改。
+
+- 源：`dsh-agent-cto`
+- 同步：在 cto 仓库执行 `pnpm design:sync`
+- 校验：`pnpm design:drift`（任何差异退出 1）
+- CI：`.github/workflows/design-kit.yml` 会在 design-kit 存在时自动跑
+  token 校验与示例实例 check
